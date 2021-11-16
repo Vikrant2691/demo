@@ -26,7 +26,7 @@ public class WeatherMapper {
         return modelMapper.typeMap(Weather.class, WeatherDto.class)
                 .addMappings(mapper -> {
                     mapper.map(src -> src.getCity().getName(), WeatherDto::setCity);
-                    mapper.map(src -> src.getWeatherType().toString(), WeatherDto::setWeatherType);
+//                    mapper.map(src -> src.getWeatherType().toString(), WeatherDto::setWeatherType);
                 }).map(weather);
 
 
