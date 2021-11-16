@@ -2,9 +2,7 @@ package co.vison.demo.dto;
 
 
 import co.vison.demo.model.City;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -13,6 +11,8 @@ import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
 @Builder
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class WeatherDto {
