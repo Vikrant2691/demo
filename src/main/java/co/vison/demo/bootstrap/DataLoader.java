@@ -26,6 +26,7 @@ public class DataLoader implements CommandLineRunner {
 
         City mumbai= cityRepository.save(City.builder().name("Mumbai").build());
         City banglore= cityRepository.save(City.builder().name("Banglore").build());
+        City tamilNadu= cityRepository.save(City.builder().name("TamilNadu").build());
 
         weatherRepository.save(Weather.builder()
                 .city(mumbai)
