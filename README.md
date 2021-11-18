@@ -2,7 +2,7 @@
  This is a bare-bones example of a Spring Boot project which returns weather information to the users about the current weather and the forecasted weather.
  Currently it only supports three cities Mumbai, Banglore, TamilNadu. Random values for weather data is generated and inserted by the DataLoader class at the start of the application.
  As mentioned exceptions and edge cases are handled. 
- The weather data is generally public therefore security is not added.
+ The weather data is generally public so the security is not added.
  The data is stored in an internal H2 database.
  Spring profiles are not created but can be added.
 
