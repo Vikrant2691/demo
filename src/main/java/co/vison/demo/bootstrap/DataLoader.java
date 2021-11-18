@@ -9,12 +9,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Component
 public class DataLoader implements CommandLineRunner {
 
     private final WeatherRepository weatherRepository;
-    private final CityRepository cityRepository ;
+    private final CityRepository cityRepository;
 
     public DataLoader(WeatherRepository weatherRepository, CityRepository cityRepository) {
         this.weatherRepository = weatherRepository;
@@ -24,57 +25,32 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        City mumbai= cityRepository.save(City.builder().name("Mumbai").build());
-        City banglore= cityRepository.save(City.builder().name("Banglore").build());
-        City tamilNadu= cityRepository.save(City.builder().name("TamilNadu").build());
+        City mumbai = cityRepository.save(City.builder().name("Mumbai").build());
+        City banglore = cityRepository.save(City.builder().name("Banglore").build());
+        City tamilNadu = cityRepository.save(City.builder().name("TamilNadu").build());
 
-        weatherRepository.save(Weather.builder()
-                .city(mumbai)
-                .weatherType(WeatherType.CLOUDY)
-                .date(LocalDate.of(2021,11,15))
-                .build());
+        List<City> cities= List.of(mumbai,banglore,tamilNadu);
 
-        weatherRepository.save(Weather.builder()
-                .city(mumbai)
-                .weatherType(WeatherType.OVERCAST)
-                .date(LocalDate.of(2021,11,16))
-                .build());
+        List<WeatherType> weatherSet = List.of(WeatherType.values());
 
-        weatherRepository.save(Weather.builder()
-                .city(mumbai)
-                .weatherType(WeatherType.RAINY)
-                .date(LocalDate.of(2021,11,17))
-                .build());
+        populateData(cities,weatherSet);
 
-        weatherRepository.save(Weather.builder()
-                .city(mumbai)
-                .weatherType(WeatherType.SUNNY)
-                .date(LocalDate.of(2021,11,18))
-                .build());
+    }
 
-        weatherRepository.save(Weather.builder()
-                .city(banglore)
-                .weatherType(WeatherType.CLOUDY)
-                .date(LocalDate.of(2021,11,15))
-                .build());
+    private void populateData(List<City> cities, List<WeatherType> weatherTypes) {
 
-        weatherRepository.save(Weather.builder()
-                .city(banglore)
-                .weatherType(WeatherType.OVERCAST)
-                .date(LocalDate.of(2021,11,16))
-                .build());
 
-        weatherRepository.save(Weather.builder()
-                .city(banglore)
-                .weatherType(WeatherType.RAINY)
-                .date(LocalDate.of(2021,11,17))
-                .build());
+        for (int i = 0; i < cities.size(); i++) {
 
-        weatherRepository.save(Weather.builder()
-                .city(banglore)
-                .weatherType(WeatherType.SUNNY)
-                .date(LocalDate.of(2021,11,18))
-                .build());
+            for (int j = 0; j < 10; j++) {
+                weatherRepository.save(Weather.builder()
+                        .city(cities.get(i))
+                        .weatherType(weatherTypes.get((int) (Math.random() * weatherTypes.size())))
+                        .temperature((int) (Math.random() * 67))
+                        .date(LocalDate.now().plusDays(j))
+                        .build());
+            }
+        }
 
 
     }
